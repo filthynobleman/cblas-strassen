@@ -15,20 +15,7 @@
 #ifndef CBLAS_STRASSEN_H_
 #define CBLAS_STRASSEN_H_
 
-
-#define MKL_CBLAS
-
-// Intel MKL has its own header files and types
-#ifdef MKL_CBLAS
 #include <mkl_cblas.h>
-#define CS_INT  MKL_UINT64
-#else
-#include <cblas.h>
-#define CS_INT  unsigned long
-#endif
-
-
-
 
 /**
  * @brief       Single precision floating point matrix multiplication with Strassen's algorithm.
@@ -56,10 +43,10 @@
  * @param wm        Working space. Must contain at least (M * N) / 2 elements.
  */
 void cblas_sstrassen(CBLAS_LAYOUT lo, CBLAS_TRANSPOSE transA, CBLAS_TRANSPOSE transB,
-                    CS_INT M, CS_INT N, CS_INT K,
-                    float alpha, const float* A, CS_INT ldA, const float* B, CS_INT ldB,
-                    float beta, float* C, CS_INT ldC,
-                    float* wlh, float* wrh, float* wm);
+                     MKL_INT M, MKL_INT N, MKL_INT K,
+                     float alpha, const float* A, MKL_INT ldA, const float* B, MKL_INT ldB,
+                     float beta, float* C, MKL_INT ldC,
+                     float* wlh, float* wrh, float* wm);
 
 
 /**
@@ -88,10 +75,10 @@ void cblas_sstrassen(CBLAS_LAYOUT lo, CBLAS_TRANSPOSE transA, CBLAS_TRANSPOSE tr
  * @param wm        Working space. Must contain at least (M * N) / 2 elements.
  */
 void cblas_dstrassen(CBLAS_LAYOUT lo, CBLAS_TRANSPOSE transA, CBLAS_TRANSPOSE transB,
-                    CS_INT M, CS_INT N, CS_INT K,
-                    double alpha, const double* A, CS_INT ldA, const double* B, CS_INT ldB,
-                    double beta, double* C, CS_INT ldC,
-                    double* wlh, double* wrh, double* wm);
+                     MKL_INT M, MKL_INT N, MKL_INT K,
+                     double alpha, const double* A, MKL_INT ldA, const double* B, MKL_INT ldB,
+                     double beta, double* C, MKL_INT ldC,
+                     double* wlh, double* wrh, double* wm);
 
 
 /**
@@ -120,10 +107,10 @@ void cblas_dstrassen(CBLAS_LAYOUT lo, CBLAS_TRANSPOSE transA, CBLAS_TRANSPOSE tr
  * @param wm        Working space. Must contain at least (M * N) / 2 elements.
  */
 void cblas_cstrassen(CBLAS_LAYOUT lo, CBLAS_TRANSPOSE transA, CBLAS_TRANSPOSE transB,
-                    CS_INT M, CS_INT N, CS_INT K,
-                    const void* alpha, const void* A, CS_INT ldA, const void* B, CS_INT ldB,
-                    const void* beta, void* C, CS_INT ldC,
-                    void* wlh, void* wrh, void* wm);
+                     MKL_INT M, MKL_INT N, MKL_INT K,
+                     const void* alpha, const void* A, MKL_INT ldA, const void* B, MKL_INT ldB,
+                     const void* beta, void* C, MKL_INT ldC,
+                     void* wlh, void* wrh, void* wm);
 
 /**
  * @brief       Double precision floating point complex matrix multiplication with Strassen's algorithm.
@@ -151,10 +138,10 @@ void cblas_cstrassen(CBLAS_LAYOUT lo, CBLAS_TRANSPOSE transA, CBLAS_TRANSPOSE tr
  * @param wm        Working space. Must contain at least (M * N) / 2 elements.
  */
 void cblas_zstrassen(CBLAS_LAYOUT lo, CBLAS_TRANSPOSE transA, CBLAS_TRANSPOSE transB,
-                    CS_INT M, CS_INT N, CS_INT K,
-                    const void* alpha, const void* A, CS_INT ldA, const void* B, CS_INT ldB,
-                    const void* beta, void* C, CS_INT ldC,
-                    void* wlh, void* wrh, void* wm);
+                     MKL_INT M, MKL_INT N, MKL_INT K,
+                     const void* alpha, const void* A, MKL_INT ldA, const void* B, MKL_INT ldB,
+                     const void* beta, void* C, MKL_INT ldC,
+                     void* wlh, void* wrh, void* wm);
 
 
 

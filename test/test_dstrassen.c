@@ -19,10 +19,10 @@
 
 int main(int argc, char const *argv[])
 {
-    CS_INT M = 1024;
-    CS_INT N = 1024;
-    CS_INT K = 1024;
-    CS_INT Seed = 0;
+    MKL_INT M = 1024;
+    MKL_INT N = 1024;
+    MKL_INT K = 1024;
+    MKL_INT Seed = 0;
 
     if (argc >= 4)
     {
@@ -38,7 +38,7 @@ int main(int argc, char const *argv[])
 
     clock_t Start, End;
     double Error;
-    CS_INT i;
+    MKL_INT i;
 
     printf("Allocation of memory... ");
     Start = clock();

@@ -15,10 +15,10 @@
 
 
 void cblas_cstrassen(CBLAS_LAYOUT lo, CBLAS_TRANSPOSE transA, CBLAS_TRANSPOSE transB,
-                    CS_INT M, CS_INT N, CS_INT K,
-                    const void* alpha, const void* A, CS_INT ldA, const void* B, CS_INT ldB,
-                    const void* beta, void* C, CS_INT ldC,
-                    void* wlh, void* wrh, void* wm)
+                     MKL_INT M, MKL_INT N, MKL_INT K,
+                     const void* alpha, const void* A, MKL_INT ldA, const void* B, MKL_INT ldB,
+                     const void* beta, void* C, MKL_INT ldC,
+                     void* wlh, void* wrh, void* wm)
 {
     // If layout is column major, convert to row major
     if (lo == CblasColMajor)
@@ -37,19 +37,19 @@ void cblas_cstrassen(CBLAS_LAYOUT lo, CBLAS_TRANSPOSE transA, CBLAS_TRANSPOSE tr
 
 
     // Get sizes of submatrices
-    CS_INT M2 = (M + 1) / 2;
-    CS_INT N2 = (N + 1) / 2;
-    CS_INT K2 = (K + 1) / 2;
+    MKL_INT M2 = (M + 1) / 2;
+    MKL_INT N2 = (N + 1) / 2;
+    MKL_INT K2 = (K + 1) / 2;
 
 
     // Compute the working memory to use in recursive calls
     _Fcomplex* wslh = ((_Fcomplex*)wlh) + M2 * K2;
     _Fcomplex* wsrh = ((_Fcomplex*)wrh) + K2 * N2;
     _Fcomplex* wsm = ((_Fcomplex*)wm) + M2 * N2;
-    CS_INT i;
-    CS_INT ldLH;
-    CS_INT ldRH;
-    CS_INT ldM;
+    MKL_INT i;
+    MKL_INT ldLH;
+    MKL_INT ldRH;
+    MKL_INT ldM;
 
 
     // Compute the submatrices of A, B and C

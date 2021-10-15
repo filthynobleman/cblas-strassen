@@ -17,9 +17,8 @@
 
 
 
-// Window does not have getopt. I use the AT&T open implementation
+// Windows does not have getopt. To guarantee cross-platform support I use the AT&T open implementation
 // https://opensource.apple.com/source/patch_cmds/patch_cmds-17/diffstat/porting/getopt.c.auto.html
-#if defined(_WIN32) || defined(_WIN64)
 #define ERR() if(opterr){return -2;}
 
 int opterr = 1;
@@ -77,9 +76,6 @@ int getopt(int argc, char * const *argv, const char *opts)
     }
     return (c);
 }
-#else
-#include <getopt.h>
-#endif
 
 
 
@@ -91,10 +87,10 @@ void usage(const char* argv0, int is_help)
     fprintf(stderr, "Each iteration is averaged on 10 repetitions. Results are stored in the CSV file test_times.csv.\n\n");
     fprintf(stderr, "       MIN_SIZE and MAX_SIZE are the minimum and maximum sizes for matrices.\n");
     fprintf(stderr, "       STEP is the difference in sizes between two iterations.\n");
-    fprintf(stderr, "       [-o=FILENAME] to save the result in FILENAME rather than test_times.csv.\n");
-    fprintf(stderr, "       [-a=TA] and [-b=TB] to (conjugate-)transpose either the left or right factor. Can be N, T or H.\n");
-    fprintf(stderr, "       [-d=DATATYPE] to select the datatype. Can be S, D, C or Z.\n");
-    fprintf(stderr, "       [-n=NUM_REPS] to change the number of repetitions of each iteration.\n");
+    fprintf(stderr, "       [-o FILENAME] to save the result in FILENAME rather than test_times.csv.\n");
+    fprintf(stderr, "       [-a TA] and [-b TB] to (conjugate-)transpose either the left or right factor. Can be N, T or H.\n");
+    fprintf(stderr, "       [-d DATATYPE] to select the datatype. Can be S, D, C or Z.\n");
+    fprintf(stderr, "       [-n NUM_REPS] to change the number of repetitions of each iteration.\n");
     fprintf(stderr, "       [-h] to print this message.\n\n");
     
     if (!is_help)
@@ -107,11 +103,11 @@ void usage(const char* argv0, int is_help)
 
 int main(int argc, char * const *argv)
 {
-    CS_INT NMin;
-    CS_INT NMax;
-    CS_INT NStep;
-    CS_INT Steps;
-    CS_INT NReps = 10;
+    MKL_INT NMin;
+    MKL_INT NMax;
+    MKL_INT NStep;
+    MKL_INT Steps;
+    MKL_INT NReps = 10;
     const char* OutFile = "test_times.csv";
     CBLAS_TRANSPOSE TA = CblasNoTrans;
     CBLAS_TRANSPOSE TB = CblasNoTrans;
@@ -212,9 +208,9 @@ int main(int argc, char * const *argv)
     void* mM;
     void* mLH;
     void* mRH;
-    CS_INT N;
-    CS_INT i;
-    CS_INT j;
+    MKL_INT N;
+    MKL_INT i;
+    MKL_INT j;
     clock_t Start;
     clock_t End;
     double* Times = calloc(2 * NReps * Steps, sizeof(double));
